@@ -1,0 +1,100 @@
+---
+import { getCollection } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Intro from "../components/Intro.astro";
+import PostItem from "../components/PostItem.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const posts = await getCollection("blog", ({ data }) => {
+    return data.draft !== true && data.pubDate;
+  });
+
+  return paginate(posts, { pageSize: 8 });
+};
+interface Props {
+  page: Page;
+}
+const { page } = Astro.props;
+const metaTitle =
+  page.currentPage > 1
+    ? `${SITE_TITLE} — Page ${page.currentPage}`
+    : SITE_TITLE;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={metaTitle} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="container">
+      {page.currentPage === 1 && <Intro />}
+      <div class="col-md-8 mx-auto">
+        <ul class="list-unstyled">
+          {page.data.map((post) => <PostItem post={post} />)}
+        </ul>
+
+        <nav class="d-flex justify-content-between align-items-center mt-5">
+          <div>
+            {
+              page.url.prev ? (
+                <a href={page.url.prev} class="pagination-link prev">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m15 18-6-6 6-6" />
+                  </svg>
+                  <span>Newer Posts</span>
+                </a>
+              ) : (
+                <div />
+              )
+            }
+          </div>
+
+          <div class="text-end">
+            {
+              page.url.next ? (
+                <a href={page.url.next} class="pagination-link next">
+                  <span>Older Posts</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                </a>
+              ) : (
+                <div />
+              )
+            }
+          </div>
+        </nav>
+      </div>
+    </main>
+    <Footer />
+    <script>
+      import "../script/main.js";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets";
+import introImage from "../assets/Banner.jpg";
+---
+
+<section class="intro-section col-md-8 mx-auto text-center mb-5">
+  <div class="vstack gap-3">
+    <Image
+      src={introImage}
+      width={1020}
+      height={510}
+      alt="The Catchall Intro"
+      class="img-fluid rounded"
+      format="webp"
+    />
+    <h2 class="mb-0">
+      Everything, <span class="text-body-secondary fst-italic">Everywhere.</span
+      >
+    </h2>
+  </div>
+</section>

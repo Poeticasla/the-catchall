@@ -1,0 +1,65 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+import { type CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<li class="pb-3 border-bottom border-secondary border-opacity-25 mb-3">
+  <div class="d-flex align-items-center small mb-2">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="me-2"
+    >
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+      <line x1="16" y1="2" x2="16" y2="6"></line>
+      <line x1="8" y1="2" x2="8" y2="6"></line>
+      <line x1="3" y1="10" x2="21" y2="10"></line>
+    </svg>
+    {post.data.pubDate && <FormattedDate date={post.data.pubDate} />}
+  </div>
+
+  <h2 class="h3">
+    <a href={`/${post.id}/`} class="text-decoration-none link-body-emphasis">
+      {post.data.title}
+    </a>
+  </h2>
+
+  <p class="text-body-secondary">
+    {post.data.description}
+  </p>
+
+  <a
+    href={`/${post.id}/`}
+    class="fw-medium small text-decoration-none d-inline-flex align-items-center"
+  >
+    Continue reading
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="ms-1"
+    >
+      <path d="M5 12h14"></path>
+      <path d="m12 5 7 7-7 7"></path>
+    </svg>
+  </a>
+</li>

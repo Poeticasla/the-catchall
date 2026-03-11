@@ -1,0 +1,93 @@
+@import "bootstrap/scss/functions";
+
+$breadcrumb-divider: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' fill='%236c757d'%3E%3Cpath fill-rule='evenodd' d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'/%3E%3C/svg%3E");
+$breadcrumb-margin-bottom: 0;
+$breadcrumb-font-size: 0.875rem;
+$link-decoration: none;
+$body-bg-dark: #141414;
+$primary: #3264ff;
+$body-color: #1e1e1e;
+$body-emphasis-color: #1c1c1c;
+$font-family-sans-serif: "Google Sans", system-ui, sans-serif;
+$btn-font-weight: 600;
+$btn-line-height: 1;
+$btn-border-radius: 0;
+
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+
+$theme-colors: map-remove($theme-colors, "info", "success", "danger", "warning", "light");
+$colors: map-remove($colors, "info", "success", "danger", "warning", "light", "blue", "indigo", "purple", "pink", "red", "orange", "yellow", "green", "teal", "cyan");
+$theme-colors-text: map-remove($theme-colors-text, "info", "success", "danger", "warning", "light");
+$theme-colors-bg-subtle: map-remove($theme-colors-bg-subtle, "info", "success", "danger", "warning", "light");
+$theme-colors-border-subtle: map-remove($theme-colors-border-subtle, "info", "success", "danger", "warning", "light");
+$theme-colors-text-dark: map-remove($theme-colors-text-dark, "info", "success", "danger", "warning", "light");
+$theme-colors-bg-subtle-dark: map-remove($theme-colors-bg-subtle-dark, "info", "success", "danger", "warning", "light");
+$theme-colors-border-subtle-dark: map-remove($theme-colors-border-subtle-dark, "info", "success", "danger", "warning", "light");
+
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/helpers";
+
+@import "bootstrap/scss/transitions";
+@import 'bootstrap/scss/breadcrumb';
+@import 'bootstrap/scss/images';
+@import 'bootstrap/scss/nav';
+
+
+@import "bootstrap/scss/utilities/api";
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+
+
+.sun-icon,
+.moon-icon {
+  display: none;
+}
+
+[data-bs-theme="light"] .sun-icon {
+  display: block;
+  color: #212529;
+}
+
+[data-bs-theme="dark"] .moon-icon {
+  display: block;
+  color: #f1f5f9;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+.pagination-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  text-decoration: none;
+  color: var(--bs-body-color);
+  transition: color 0.2s ease;
+}
+
+.pagination-link svg {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pagination-link:hover {
+  color: var(--bs-primary);
+}
+
+.pagination-link.prev:hover svg {
+  transform: translateX(-3px);
+}
+
+.pagination-link.next:hover svg {
+  transform: translateX(3px);
+}

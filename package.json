@@ -13,6 +13,8 @@
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.17.1",
+    "bootstrap": "^5.3.8",
+    "sass": "^1.97.3",
     "sharp": "^0.34.3"
   }
 }

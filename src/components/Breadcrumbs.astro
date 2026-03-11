@@ -1,0 +1,37 @@
+---
+interface Props {
+  title?: string;
+  category?: string;
+}
+
+const { title, category } = Astro.props;
+
+if (!title) return null;
+---
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/" class="text-decoration-none">Home</a>
+    </li>
+    {
+      category && (
+        <li class="breadcrumb-item">
+          <a
+            href={`/category/${category.toLowerCase().replace(/\s+/g, "-")}`}
+            class="text-decoration-none"
+          >
+            {category}
+          </a>
+        </li>
+      )
+    }
+    <li
+      class="breadcrumb-item active text-truncate"
+      aria-current="page"
+      style="max-width: 300px;"
+    >
+      {title}
+    </li>
+  </ol>
+</nav>
